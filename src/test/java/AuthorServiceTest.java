@@ -20,6 +20,11 @@ public class AuthorServiceTest {
         Author a = new Author();
         a.setName("孙尧佳");
         Assert.assertEquals("孙尧佳",  authorService.save(a).getName());
+    }
 
+    @Test
+    public void testFind(){
+        Author a = authorService.findByID(1);
+        Assert.assertEquals("孙尧佳", a.getName());
     }
 }
