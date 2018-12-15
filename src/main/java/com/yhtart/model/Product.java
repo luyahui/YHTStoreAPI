@@ -9,6 +9,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false)
+    private String num;
+
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
@@ -23,7 +26,7 @@ public class Product {
     private String type;
 
     @Column(nullable = false)
-    private String imageUrl;
+    private String imgUrl;
 
     public long getId() {
         return id;
@@ -31,6 +34,14 @@ public class Product {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
     }
 
     public Author getAuthor() {
@@ -65,11 +76,11 @@ public class Product {
         this.type = type;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

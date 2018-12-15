@@ -24,4 +24,16 @@ public class ProductService {
     public Page<Product> findAll(int pageNo, int pageSize) {
         return productRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
+
+    public Product find(long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
+    public boolean exists(long id){
+        return productRepository.existsById(id);
+    }
+
+    public void delete(long id) {
+        productRepository.deleteById(id);
+    }
 }

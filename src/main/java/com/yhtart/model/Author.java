@@ -11,6 +11,9 @@ public class Author {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String level;
+
     public long getId() {
         return id;
     }
@@ -25,5 +28,13 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }
