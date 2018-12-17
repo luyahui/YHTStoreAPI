@@ -43,6 +43,54 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/author")
+    public ResponseEntity searchByAuthor(@PathParam("keyword") String keyword,
+                                        @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        Page<Product> products;
+        if(keyword.equals(""))
+            products = productService.findAll(pageNo, pageSize);
+        else
+            products = productService.findByAuthor(keyword, pageNo, pageSize);
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/material")
+    public ResponseEntity searchByMaterial(@PathParam("keyword") String keyword,
+                                         @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        Page<Product> products;
+        if(keyword.equals(""))
+            products = productService.findAll(pageNo, pageSize);
+        else
+            products = productService.findByMaterial(keyword, pageNo, pageSize);
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/type")
+    public ResponseEntity searchByType(@PathParam("keyword") String keyword,
+                                         @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        Page<Product> products;
+        if(keyword.equals(""))
+            products = productService.findAll(pageNo, pageSize);
+        else
+            products = productService.findByType(keyword, pageNo, pageSize);
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/num")
+    public ResponseEntity searchByNum(@PathParam("keyword") String keyword,
+                                       @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                       @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        Page<Product> products;
+        if(keyword.equals(""))
+            products = productService.findAll(pageNo, pageSize);
+        else
+            products = productService.findByNum(keyword, pageNo, pageSize);
+        return ResponseEntity.ok(products);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity editProduct(@PathVariable long id, @RequestBody Product product) {
         if (!productService.exists(id))

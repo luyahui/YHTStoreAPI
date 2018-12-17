@@ -40,4 +40,20 @@ public class ProductService {
     public Page<Product> findByKeyword(String keyword, int pageNo, int pageSize) {
         return productRepository.findByKeyword(keyword, PageRequest.of(pageNo, pageSize));
     }
+
+    public Page<Product> findByAuthor(String keyword, int pageNo, int pageSize) {
+        return productRepository.findByAuthor(keyword, PageRequest.of(pageNo, pageSize));
+    }
+
+    public Page<Product> findByMaterial(String keyword, int pageNo, int pageSize) {
+        return productRepository.findByMaterial(keyword, PageRequest.of(pageNo, pageSize));
+    }
+
+    public Page<Product> findByType(String keyword, int pageNo, int pageSize) {
+        return  productRepository.findByType(keyword, PageRequest.of(pageNo, pageSize));
+    }
+
+    public Page<Product> findByNum(String keyword, int pageNo, int pageSize) {
+        return productRepository.findByNum(keyword, PageRequest.of(pageNo, pageSize));
+    }
 }
