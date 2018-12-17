@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+
 @RestController
 @RequestMapping("sliderList")
 public class SliderController {
@@ -22,6 +24,7 @@ public class SliderController {
     @PostMapping
     public ResponseEntity addSlider(@RequestBody Slider slider) {
         try {
+            slider.setDate(new Date(System.currentTimeMillis()));
             slider = sliderService.save(slider);
             if (slider != null)
                 return new ResponseEntity(slider, HttpStatus.CREATED);
@@ -38,6 +41,7 @@ public class SliderController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         try {
             slider.setId(id);
+            slider.setDate(new Date(System.currentTimeMillis()));
             slider = sliderService.save(slider);
             if (slider != null)
                 return new ResponseEntity(slider, HttpStatus.CREATED);

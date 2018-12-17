@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 @RequestMapping(path = "/goods")
 public class ProductController {
@@ -27,6 +29,18 @@ public class ProductController {
     public ResponseEntity getProduct(@PathVariable long id) {
         Product product = productService.find(id);
         return product == null ? new ResponseEntity(HttpStatus.NO_CONTENT) : ResponseEntity.ok(product);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity searchProduct(@PathParam("keyword") String keyword,
+                                        @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        Page<Product> products;
+        if(keyword.equals(""))
+            products = productService.findAll(pageNo, pageSize);
+        else
+            products = productService.findByKeyword(keyword, pageNo, pageSize);
+        return ResponseEntity.ok(products);
     }
 
     @PutMapping("/{id}")

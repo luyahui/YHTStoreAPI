@@ -36,4 +36,8 @@ public class ProductService {
     public void delete(long id) {
         productRepository.deleteById(id);
     }
+
+    public Page<Product> findByKeyword(String keyword, int pageNo, int pageSize) {
+        return productRepository.findByKeyword(keyword, PageRequest.of(pageNo, pageSize));
+    }
 }
