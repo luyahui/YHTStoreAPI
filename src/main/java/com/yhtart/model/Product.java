@@ -20,11 +20,13 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String material;
+    @ManyToOne
+    @JoinColumn(name = "material_id")
+    private Material material;
 
-    @Column(nullable = false)
-    private String type;
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private ProductType type;
 
     @Column(nullable = false)
     private String imgUrl;
@@ -67,19 +69,19 @@ public class Product {
         this.name = name;
     }
 
-    public String getMaterial() {
+    public Material getMaterial() {
         return material;
     }
 
-    public void setMaterial(String material) {
+    public void setMaterial(Material material) {
         this.material = material;
     }
 
-    public String getType() {
+    public ProductType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ProductType type) {
         this.type = type;
     }
 
