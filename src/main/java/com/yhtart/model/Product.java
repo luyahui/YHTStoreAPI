@@ -1,6 +1,7 @@
 package com.yhtart.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 public class Product {
@@ -27,6 +28,12 @@ public class Product {
 
     @Column(nullable = false)
     private String imgUrl;
+
+    @Column(nullable = false)
+    private Date date;
+
+    @Column
+    private int clicks;
 
     public long getId() {
         return id;
@@ -82,5 +89,21 @@ public class Product {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getClicks() {
+        return clicks;
+    }
+
+    public void setClicks(int clicks) {
+        this.clicks = clicks;
     }
 }
