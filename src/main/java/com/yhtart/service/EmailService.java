@@ -36,6 +36,14 @@ public class EmailService {
     }
 
     public boolean sendMailByCustomer(Customer customer){
-        return true;
+        String to = "284854930@qq.com";
+        String subject = "客户询价";
+        StringBuilder content = new StringBuilder();
+        content.append("您好，\n");
+        content.append("有新客户询价，客户信息如下，请及时联系。\n");
+        content.append("\t\t姓名：" + customer.getName());
+        content.append("\t\t联系电话：" + customer.getPhoneNo());
+        content.append("\t\t商品链接：" + customer.getProductUrl());
+        return sendMail(to, subject, content.toString());
     }
 }

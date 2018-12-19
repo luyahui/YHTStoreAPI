@@ -1,4 +1,5 @@
 import com.yhtart.Application;
+import com.yhtart.model.Customer;
 import com.yhtart.service.EmailService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,5 +23,15 @@ public class EmailServiceTest {
         String content = "This is a test Email";
 
         Assert.assertTrue(emailService.sendMail(to, subject, content));
+    }
+
+    @Test
+    public void testSendToCustomer(){
+        Customer customer = new Customer();
+        customer.setName("路亚辉");
+        customer.setPhoneNo("12345678901");
+        customer.setProductUrl("https://www.abc.com/def");
+
+        Assert.assertTrue(emailService.sendMailByCustomer(customer));
     }
 }
