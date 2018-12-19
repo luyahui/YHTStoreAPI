@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 @Service
@@ -22,6 +23,7 @@ public class EmailService {
 
         try{
             // set message properties
+            helper.setFrom(new InternetAddress("notice_yht@163.com"));
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content);
