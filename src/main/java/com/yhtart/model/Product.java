@@ -28,6 +28,12 @@ public class Product {
     @JoinColumn(name = "type_id")
     private ProductType type;
 
+    @Column
+    private String engraving;
+
+    @Column
+    private int capacity;
+
     @Column(nullable = false)
     private String imgUrl;
 
@@ -107,5 +113,21 @@ public class Product {
 
     public void setClicks(int clicks) {
         this.clicks = clicks;
+    }
+
+    public String getEngraving() {
+        return engraving;
+    }
+
+    public void setEngraving(String engraving) {
+        this.engraving = engraving;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

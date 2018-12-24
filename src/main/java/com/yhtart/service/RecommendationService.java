@@ -7,15 +7,15 @@ import com.yhtart.repository.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class RecommendationService {
 
     @Autowired
     private RecommendationRepository recommendationRepository;
-//
-//    @Autowired
-//    private ProductRepository productRepository;
 
+    @Transactional
     public Recommendation save(Recommendation recommendation) {
         return recommendationRepository.save(recommendation);
     }
@@ -24,6 +24,7 @@ public class RecommendationService {
         return recommendationRepository.findByProductId(product_id) != null;
     }
 
+    @Transactional
     public void delete(long product_id) {
         recommendationRepository.deleteByProductId(product_id);
     }

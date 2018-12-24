@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class SliderService {
     @Autowired
@@ -15,6 +17,7 @@ public class SliderService {
         return sliderRepository.findAll();
     }
 
+    @Transactional
     public Slider save(Slider slider) {
         return sliderRepository.save(slider);
     }
@@ -23,6 +26,7 @@ public class SliderService {
         return sliderRepository.existsById(id);
     }
 
+    @Transactional
     public void delete(long id) {
         sliderRepository.deleteById(id);
     }

@@ -3,18 +3,14 @@ package com.yhtart.model;
 import javax.persistence.*;
 
 @Entity
-public class ProductType {
+public class ProductShape {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "shape_id")
-    private ProductShape shape;
-
     @Column(nullable = false)
-    private String type;
+    private String shape;
 
     public long getId() {
         return id;
@@ -24,19 +20,11 @@ public class ProductType {
         this.id = id;
     }
 
-    public ProductShape getShape() {
+    public String getShape() {
         return shape;
     }
 
-    public void setShape(ProductShape shape) {
+    public void setShape(String shape) {
         this.shape = shape;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

@@ -12,6 +12,10 @@ public class Material {
     @Column(nullable = false)
     private String material;
 
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private MaterialType type;
+
     public long getId() {
         return id;
     }
@@ -26,5 +30,13 @@ public class Material {
 
     public void setMaterial(String material) {
         this.material = material;
+    }
+
+    public MaterialType getType() {
+        return type;
+    }
+
+    public void setType(MaterialType type) {
+        this.type = type;
     }
 }

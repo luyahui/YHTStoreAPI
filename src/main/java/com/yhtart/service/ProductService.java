@@ -33,6 +33,7 @@ public class ProductService {
         return productRepository.existsById(id);
     }
 
+    @Transactional
     public void delete(long id) {
         productRepository.deleteById(id);
     }

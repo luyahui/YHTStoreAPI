@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("authors")
 public class AuthorController {
@@ -21,6 +24,12 @@ public class AuthorController {
         Page<Author> authors = authorService.findAll(pageNo, pageSize);
 
         return authors.hasContent() ? new ResponseEntity(authors, HttpStatus.OK) : new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/levels")
+    public ResponseEntity getAuthorsByLevel(){
+        Map<String, List<Author>> authors = authorService.findAllByLevel();
+        return ResponseEntity.ok(authors);
     }
 
     @GetMapping("/{id}")
@@ -40,7 +49,6 @@ public class AuthorController {
                 return ResponseEntity.ok(author);
         } catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
@@ -53,7 +61,6 @@ public class AuthorController {
                 return new ResponseEntity(author, HttpStatus.CREATED);
         } catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
