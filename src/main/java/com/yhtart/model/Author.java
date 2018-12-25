@@ -1,6 +1,6 @@
 package com.yhtart.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -13,9 +13,12 @@ public class Author {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String imgUrl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private AuthorLevel level;
 
     public long getId() {
@@ -32,6 +35,14 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public AuthorLevel getLevel() {

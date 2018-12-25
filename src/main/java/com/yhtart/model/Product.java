@@ -28,8 +28,9 @@ public class Product {
     @JoinColumn(name = "type_id")
     private ProductType type;
 
-    @Column
-    private String engraving;
+    @ManyToOne
+    @JoinColumn(name = "engraving_id")
+    private Engraving engraving;
 
     @Column
     private int capacity;
@@ -115,11 +116,11 @@ public class Product {
         this.clicks = clicks;
     }
 
-    public String getEngraving() {
+    public Engraving getEngraving() {
         return engraving;
     }
 
-    public void setEngraving(String engraving) {
+    public void setEngraving(Engraving engraving) {
         this.engraving = engraving;
     }
 
