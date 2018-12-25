@@ -46,7 +46,7 @@ public class ProductServiceTest {
         p.setType(type);
         p.setNum("zs001");
         p.setName("紫砂壶1");
-        p.setImgUrl("https://youimg1.c-ctrip.com/target/10080j0000009zuyqADB9_R_300_300_Q90.jpg?proc=autoorient");
+        p.setImgUrls("https://youimg1.c-ctrip.com/target/10080j0000009zuyqADB9_R_300_300_Q90.jpg?proc=autoorient");
         p.setDate(date);
         Assert.assertEquals("紫砂壶1", productService.save(p).getName());
 
@@ -57,7 +57,7 @@ public class ProductServiceTest {
         p.setType(type);
         p.setNum("zs002");
         p.setName("紫砂壶2");
-        p.setImgUrl("https://dimg05.c-ctrip.com/images/100a0c00000064pqzDAB6_C_238_268.jpg");
+        p.setImgUrls("https://dimg05.c-ctrip.com/images/100a0c00000064pqzDAB6_C_238_268.jpg");
         p.setDate(date);
         productService.save(p);
 
@@ -68,7 +68,7 @@ public class ProductServiceTest {
         p.setType(type);
         p.setNum("zs003");
         p.setName("紫砂壶3");
-        p.setImgUrl("https://youimg1.c-ctrip.com/target/10080j0000009zuyqADB9_R_300_300_Q90.jpg?proc=autoorient");
+        p.setImgUrls("https://youimg1.c-ctrip.com/target/10080j0000009zuyqADB9_R_300_300_Q90.jpg?proc=autoorient");
         p.setDate(date);
         productService.save(p);
 
@@ -80,7 +80,7 @@ public class ProductServiceTest {
         p.setType(type);
         p.setNum("zs004");
         p.setName("紫砂壶4");
-        p.setImgUrl("https://dimg02.c-ctrip.com/images/fd/tg/g2/M05/87/D9/Cghzf1WwsVWAFjE2ACqTKYbSfPQ625_D_220_150.jpg");
+        p.setImgUrls("https://dimg02.c-ctrip.com/images/fd/tg/g2/M05/87/D9/Cghzf1WwsVWAFjE2ACqTKYbSfPQ625_D_220_150.jpg");
         p.setDate(date);
         productService.save(p);
 
@@ -91,7 +91,7 @@ public class ProductServiceTest {
         p.setType(type);
         p.setNum("zs005");
         p.setName("紫砂壶5");
-        p.setImgUrl("https://dimg02.c-ctrip.com/images/fd/tg/g2/M05/87/D9/Cghzf1WwsVWAFjE2ACqTKYbSfPQ625_D_220_150.jpg");
+        p.setImgUrls("https://dimg02.c-ctrip.com/images/fd/tg/g2/M05/87/D9/Cghzf1WwsVWAFjE2ACqTKYbSfPQ625_D_220_150.jpg");
         p.setDate(date);
         productService.save(p);
 
@@ -102,7 +102,7 @@ public class ProductServiceTest {
         p.setType(type);
         p.setNum("zs006");
         p.setName("紫砂壶6");
-        p.setImgUrl("https://dimg02.c-ctrip.com/images/fd/tg/g2/M05/87/D9/Cghzf1WwsVWAFjE2ACqTKYbSfPQ625_D_220_150.jpg");
+        p.setImgUrls("https://dimg02.c-ctrip.com/images/fd/tg/g2/M05/87/D9/Cghzf1WwsVWAFjE2ACqTKYbSfPQ625_D_220_150.jpg");
         p.setDate(date);
         productService.save(p);
     }

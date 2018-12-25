@@ -16,6 +16,9 @@ public class Author {
     @Column(nullable = false)
     private String imgUrl;
 
+    @Column(nullable = false)
+    private String profile;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -43,6 +46,14 @@ public class Author {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public AuthorLevel getLevel() {

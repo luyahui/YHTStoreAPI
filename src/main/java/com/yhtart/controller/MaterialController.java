@@ -52,15 +52,17 @@ public class MaterialController {
 
     @PutMapping("/{id}")
     public ResponseEntity editMaterial(@PathVariable(value = "id") long id, @RequestBody Material material) {
+        if (!materialService.exists(id))
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         try {
-            if (!materialService.exists(id))
-                return new ResponseEntity(HttpStatus.BAD_REQUEST);
             material.setId(id);
-            return ResponseEntity.ok(material);
+            material = materialService.save(material);
+            if (material != null)
+                return ResponseEntity.ok(material);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}")
