@@ -55,12 +55,14 @@ public class ProductTypeController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
         try {
+            type.setId(id);
             type = productTypeService.save(type);
-            return ResponseEntity.ok(type);
+            if (type != null)
+                return ResponseEntity.ok(type);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}")
