@@ -16,14 +16,15 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public boolean sendMail(String to, String subject, String content){
+    public boolean sendMail(String to, String subject, String content) {
         // create MimeMessage object, and MimeMessageHelper object
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        try{
+        try {
             // set message properties
-            helper.setFrom(new InternetAddress("notice_yht@163.com"));
+            helper.setFrom("notice_yht@163.com");
+//            helper.setCc("notice_yht@163.com");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content);
@@ -31,21 +32,23 @@ public class EmailService {
             // send email
             mailSender.send(message);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public boolean sendMailByCustomer(Customer customer){
+    public boolean sendMailByCustomer(Customer customer) {
         String to = "284854930@qq.com";
         String subject = "客户询价";
+//        String subject = "Greeting";
+
         StringBuilder content = new StringBuilder();
         content.append("您好，\n");
         content.append("有新客户询价，客户信息如下，请及时联系。\n");
-        content.append("\t\t姓名：" + customer.getName());
-        content.append("\t\t联系电话：" + customer.getPhoneNo());
-        content.append("\t\t商品链接：" + customer.getProductUrl());
+        content.append("\t\t姓名：" + customer.getName() + "\n");
+        content.append("\t\t联系电话：" + customer.getPhoneNo() + "\n");
+        content.append("\t\t商品链接：" + customer.getProductUrl() + "\n");
         return sendMail(to, subject, content.toString());
     }
 }

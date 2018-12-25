@@ -1,6 +1,8 @@
 package com.yhtart.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class AuthorLevel {
@@ -11,6 +13,9 @@ public class AuthorLevel {
 
     @Column(nullable = false)
     private String title;
+
+    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Author> list = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -26,5 +31,13 @@ public class AuthorLevel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Author> getList() {
+        return list;
+    }
+
+    public void setList(List<Author> list) {
+        this.list = list;
     }
 }

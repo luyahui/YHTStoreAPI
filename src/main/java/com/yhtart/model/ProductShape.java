@@ -1,6 +1,8 @@
 package com.yhtart.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ProductShape {
@@ -11,6 +13,9 @@ public class ProductShape {
 
     @Column(nullable = false)
     private String shape;
+
+    @OneToMany(mappedBy = "shape", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ProductType> list = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -26,5 +31,13 @@ public class ProductShape {
 
     public void setShape(String shape) {
         this.shape = shape;
+    }
+
+    public List<ProductType> getList() {
+        return list;
+    }
+
+    public void setList(List<ProductType> list) {
+        this.list = list;
     }
 }

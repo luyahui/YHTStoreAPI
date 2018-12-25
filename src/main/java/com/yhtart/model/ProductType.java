@@ -1,5 +1,7 @@
 package com.yhtart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,8 +11,9 @@ public class ProductType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shape_id")
+    @JsonIgnore
     private ProductShape shape;
 
     @Column(nullable = false)

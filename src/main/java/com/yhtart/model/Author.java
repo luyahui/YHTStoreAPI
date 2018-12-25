@@ -1,5 +1,7 @@
 package com.yhtart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +13,9 @@ public class Author {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
+    @JsonIgnore
     private AuthorLevel level;
 
     public long getId() {

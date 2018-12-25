@@ -30,12 +30,12 @@ public class ProductTypeController {
         ProductType type = productTypeService.findById(id);
         return type != null ? ResponseEntity.ok(type) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/shapes")
-    public ResponseEntity getAllByShape(){
-        Map<String, List<ProductType>> types = productTypeService.findAllByShape();
-        return ResponseEntity.ok(types);
-    }
+//
+//    @GetMapping("/shapes")
+//    public ResponseEntity getAllByShape(){
+//        Map<String, List<ProductType>> types = productTypeService.findAllByShape();
+//        return ResponseEntity.ok(types);
+//    }
 
     @PostMapping("")
     public ResponseEntity addType(@RequestBody ProductType type) {

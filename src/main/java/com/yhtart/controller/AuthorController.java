@@ -25,12 +25,12 @@ public class AuthorController {
 
         return authors.hasContent() ? new ResponseEntity(authors, HttpStatus.OK) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/levels")
-    public ResponseEntity getAuthorsByLevel(){
-        Map<String, List<Author>> authors = authorService.findAllByLevel();
-        return ResponseEntity.ok(authors);
-    }
+//
+//    @GetMapping("/levels")
+//    public ResponseEntity getAuthorsByLevel(){
+//        Map<String, List<Author>> authors = authorService.findAllByLevel();
+//        return ResponseEntity.ok(authors);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity getAuthor(@PathVariable long id){

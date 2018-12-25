@@ -1,5 +1,7 @@
 package com.yhtart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,8 +14,9 @@ public class Material {
     @Column(nullable = false)
     private String material;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
+    @JsonIgnore
     private MaterialType type;
 
     public long getId() {

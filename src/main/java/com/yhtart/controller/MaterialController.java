@@ -32,11 +32,11 @@ public class MaterialController {
         return material != null ? ResponseEntity.ok(material) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/types")
-    public ResponseEntity getMaterialsByType(){
-        Map<String, List<Material>> materials = materialService.findAllByType();
-        return ResponseEntity.ok(materials);
-    }
+//    @GetMapping("/types")
+//    public ResponseEntity getMaterialsByType(){
+//        Map<String, List<Material>> materials = materialService.findAllByType();
+//        return ResponseEntity.ok(materials);
+//    }
 
     @PostMapping("")
     public ResponseEntity addMaterial(@RequestBody Material material) {
