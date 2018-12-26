@@ -36,7 +36,10 @@ public class Product {
     private int capacity;
 
     @Column(nullable = false)
-    private String imgUrls;
+    private String imgUrl;
+
+    @Column(nullable = false)
+    private String detailImgUrls;
 
     @Column(nullable = false)
     private Date date;
@@ -92,12 +95,20 @@ public class Product {
         this.type = type;
     }
 
-    public String getImgUrls() {
-        return imgUrls;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImgUrls(String imgUrls) {
-        this.imgUrls = imgUrls;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getDetailImgUrls() {
+        return detailImgUrls;
+    }
+
+    public void setDetailImgUrls(String detailImgUrls) {
+        this.detailImgUrls = detailImgUrls;
     }
 
     public Date getDate() {
