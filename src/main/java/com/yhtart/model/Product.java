@@ -35,10 +35,10 @@ public class Product {
     @Column
     private int capacity;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String imgUrl;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String detailImgUrls;
 
     @Column(nullable = false)

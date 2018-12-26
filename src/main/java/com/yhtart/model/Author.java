@@ -13,10 +13,10 @@ public class Author {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String imgUrl;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String profile;
 
     @ManyToOne(fetch = FetchType.LAZY)

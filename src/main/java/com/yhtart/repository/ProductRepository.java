@@ -17,10 +17,10 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query(value = "select p from Product p where p.author.name like %:keyword%")
     Page<Product> findByAuthor(@Param("keyword") String keyword, Pageable of);
 
-    @Query(value = "select p from Product p where p.material like %:keyword%")
+    @Query(value = "select p from Product p where p.material.material like %:keyword%")
     Page<Product> findByMaterial(@Param("keyword") String keyword, Pageable of);
 
-    @Query(value = "select p from Product p where p.type like %:keyword%")
+    @Query(value = "select p from Product p where p.type.type like %:keyword%")
     Page<Product> findByType(@Param("keyword") String keyword, Pageable of);
 
     @Query(value = "select p from Product p where p.num like %:keyword%")
