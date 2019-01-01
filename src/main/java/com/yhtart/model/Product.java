@@ -32,6 +32,10 @@ public class Product {
     @JoinColumn(name = "engraving_id")
     private Engraving engraving;
 
+    @ManyToOne
+    @JoinColumn(name = "collection_id")
+    private Collection collection;
+
     @Column
     private int capacity;
 
@@ -46,6 +50,9 @@ public class Product {
 
     @Column
     private int clicks;
+
+    @Column
+    private boolean sold;
 
     public long getId() {
         return id;
@@ -135,11 +142,27 @@ public class Product {
         this.engraving = engraving;
     }
 
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
+
     public int getCapacity() {
         return capacity;
     }
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 }

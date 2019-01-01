@@ -17,7 +17,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional
-    public Product save(Product p){
+    public Product save(Product p) {
         return productRepository.save(p);
     }
 
@@ -25,11 +25,15 @@ public class ProductService {
         return productRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
 
+    public Page<Product> findAll(String collection, int pageNo, int pageSize) {
+        return productRepository.findAll(collection, PageRequest.of(pageNo, pageSize));
+    }
+
     public Product find(long id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    public boolean exists(long id){
+    public boolean exists(long id) {
         return productRepository.existsById(id);
     }
 
@@ -38,23 +42,24 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Page<Product> findByKeyword(String keyword, int pageNo, int pageSize) {
-        return productRepository.findByKeyword(keyword, PageRequest.of(pageNo, pageSize));
+    public Page<Product> findByKeyword(String keyword, String collection, int pageNo, int pageSize) {
+        return productRepository.findByKeyword(keyword, collection, PageRequest.of(pageNo, pageSize));
     }
 
-    public Page<Product> findByAuthor(String keyword, int pageNo, int pageSize) {
-        return productRepository.findByAuthor(keyword, PageRequest.of(pageNo, pageSize));
+    public Page<Product> findByAuthor(String keyword, String collection, int pageNo, int pageSize) {
+        return productRepository.findByAuthor(keyword, collection, PageRequest.of(pageNo, pageSize));
     }
 
-    public Page<Product> findByMaterial(String keyword, int pageNo, int pageSize) {
-        return productRepository.findByMaterial(keyword, PageRequest.of(pageNo, pageSize));
+    public Page<Product> findByMaterial(String keyword, String collection, int pageNo, int pageSize) {
+        return productRepository.findByMaterial(keyword, collection, PageRequest.of(pageNo, pageSize));
     }
 
-    public Page<Product> findByType(String keyword, int pageNo, int pageSize) {
-        return  productRepository.findByType(keyword, PageRequest.of(pageNo, pageSize));
+    public Page<Product> findByType(String keyword, String collection, int pageNo, int pageSize) {
+        return productRepository.findByType(keyword, collection, PageRequest.of(pageNo, pageSize));
     }
 
-    public Page<Product> findByNum(String keyword, int pageNo, int pageSize) {
-        return productRepository.findByNum(keyword, PageRequest.of(pageNo, pageSize));
+    public Page<Product> findByNum(String keyword, String collection, int pageNo, int pageSize) {
+        return productRepository.findByNum(keyword, collection, PageRequest.of(pageNo, pageSize));
     }
+
 }

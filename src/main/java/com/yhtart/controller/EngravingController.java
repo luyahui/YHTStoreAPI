@@ -16,21 +16,21 @@ public class EngravingController {
     private EngravingService engravingService;
 
     @GetMapping("")
-    public ResponseEntity getAllAuthors(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+    public ResponseEntity getAllEngravings(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         Page<Engraving> engravings = engravingService.findAll(pageNo, pageSize);
 
         return engravings.hasContent() ? new ResponseEntity(engravings, HttpStatus.OK) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getAuthor(@PathVariable long id){
+    public ResponseEntity getEngraving(@PathVariable long id){
         Engraving engraving = engravingService.findByID(id);
         return engraving == null ? new ResponseEntity(HttpStatus.NO_CONTENT) : ResponseEntity.ok(engraving);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editAuthor(@PathVariable long id, @RequestBody Engraving engraving){
+    public ResponseEntity editEngraving(@PathVariable long id, @RequestBody Engraving engraving){
         if(!engravingService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         try{
@@ -45,7 +45,7 @@ public class EngravingController {
     }
 
     @PostMapping
-    public ResponseEntity addAuthor(@RequestBody Engraving engraving){
+    public ResponseEntity addEngraving(@RequestBody Engraving engraving){
         try{
             engraving = engravingService.save(engraving);
             if(engraving != null)
@@ -57,7 +57,7 @@ public class EngravingController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteAuthor(@PathVariable long id){
+    public ResponseEntity deleteEngraving(@PathVariable long id){
         if(!engravingService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         engravingService.delete(id);
