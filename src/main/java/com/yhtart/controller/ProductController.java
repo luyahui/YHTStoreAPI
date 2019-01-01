@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.sql.Date;
 
 @RestController
@@ -33,12 +32,12 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity searchProduct(@PathParam("keyword") String keyword,
-                                        @PathParam("collection") String collection,
+    public ResponseEntity searchProduct(@RequestParam(value = "keyword", defaultValue = "") String keyword,
+                                        @RequestParam(value = "collection", defaultValue = "") String collection,
                                         @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         Page<Product> products;
-        if(keyword.equals(""))
+        if (keyword.equals(""))
             products = productService.findAll(collection, pageNo, pageSize);
         else
             products = productService.findByKeyword(keyword, collection, pageNo, pageSize);
@@ -46,12 +45,12 @@ public class ProductController {
     }
 
     @GetMapping("/author")
-    public ResponseEntity searchByAuthor(@PathParam("keyword") String keyword,
-                                         @PathParam("collection") String collection,
-                                        @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+    public ResponseEntity searchByAuthor(@RequestParam(value = "keyword", defaultValue = "") String keyword,
+                                         @RequestParam(value = "collection", defaultValue = "") String collection,
+                                         @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         Page<Product> products;
-        if(keyword.equals(""))
+        if (keyword.equals(""))
             products = productService.findAll(collection, pageNo, pageSize);
         else
             products = productService.findByAuthor(keyword, collection, pageNo, pageSize);
@@ -59,39 +58,39 @@ public class ProductController {
     }
 
     @GetMapping("/material")
-    public ResponseEntity searchByMaterial(@PathParam("keyword") String keyword,
-                                           @PathParam("collection") String collection,
-                                         @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+    public ResponseEntity searchByMaterial(@RequestParam(value = "keyword", defaultValue = "") String keyword,
+                                           @RequestParam(value = "collection", defaultValue = "") String collection,
+                                           @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         Page<Product> products;
-        if(keyword.equals(""))
-            products = productService.findAll(pageNo, pageSize);
+        if (keyword.equals(""))
+            products = productService.findAll(collection, pageNo, pageSize);
         else
             products = productService.findByMaterial(keyword, collection, pageNo, pageSize);
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/type")
-    public ResponseEntity searchByType(@PathParam("keyword") String keyword,
-                                       @PathParam("collection") String collection,
-                                         @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+    public ResponseEntity searchByType(@RequestParam(value = "keyword", defaultValue = "") String keyword,
+                                       @RequestParam(value = "collection", defaultValue = "") String collection,
+                                       @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                       @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         Page<Product> products;
-        if(keyword.equals(""))
-            products = productService.findAll(pageNo, pageSize);
+        if (keyword.equals(""))
+            products = productService.findAll(collection, pageNo, pageSize);
         else
             products = productService.findByType(keyword, collection, pageNo, pageSize);
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/num")
-    public ResponseEntity searchByNum(@PathParam("keyword") String keyword,
-                                      @PathParam("collection") String collection,
-                                       @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                       @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+    public ResponseEntity searchByNum(@RequestParam(value = "keyword", defaultValue = "") String keyword,
+                                      @RequestParam(value = "collection", defaultValue = "") String collection,
+                                      @RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+                                      @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         Page<Product> products;
-        if(keyword.equals(""))
-            products = productService.findAll(pageNo, pageSize);
+        if (keyword.equals(""))
+            products = productService.findAll(collection, pageNo, pageSize);
         else
             products = productService.findByNum(keyword, collection, pageNo, pageSize);
         return ResponseEntity.ok(products);
