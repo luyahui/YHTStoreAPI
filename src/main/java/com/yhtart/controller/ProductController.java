@@ -112,6 +112,19 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PatchMapping("/sell/{id}")
+    public ResponseEntity sellProduct(@PathVariable long id){
+        if (!productService.exists(id))
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        try{
+            productService.sell(id);
+            return ResponseEntity.ok(null);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity addProduct(@RequestBody Product product) {
 

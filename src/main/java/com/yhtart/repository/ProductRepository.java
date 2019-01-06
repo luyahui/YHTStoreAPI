@@ -4,9 +4,12 @@ import com.yhtart.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import javax.transaction.Transactional;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
     Page<Product> findAll(Pageable of);
@@ -28,4 +31,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Query(value = "select p from Product p where p.num like %:keyword% and p.collection.name like %:collection%")
     Page<Product> findByNum(@Param("keyword") String keyword, @Param("collection") String collection, Pageable of);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update Product p set p.sold = true where p.id = :id")
+    void sell(@Param("id") long id);
 }
