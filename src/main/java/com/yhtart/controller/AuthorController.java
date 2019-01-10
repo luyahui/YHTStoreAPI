@@ -33,43 +33,48 @@ public class AuthorController {
 //    }
 
     @GetMapping("/{id}")
-    public ResponseEntity getAuthor(@PathVariable long id){
+    public ResponseEntity getAuthor(@PathVariable long id) {
         Author author = authorService.findByID(id);
         return author == null ? new ResponseEntity(HttpStatus.NO_CONTENT) : ResponseEntity.ok(author);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editAuthor(@PathVariable long id, @RequestBody Author author){
-        if(!authorService.exists(id))
+    public ResponseEntity editAuthor(@PathVariable long id, @RequestBody Author author) {
+        if (!authorService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        try{
+        try {
             author.setId(id);
             author = authorService.save(author);
-            if(author != null)
+            if (author != null)
                 return ResponseEntity.ok(author);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping
-    public ResponseEntity addAuthor(@RequestBody Author author){
-        try{
+    public ResponseEntity addAuthor(@RequestBody Author author) {
+        try {
             author = authorService.save(author);
-            if(author != null)
+            if (author != null)
                 return new ResponseEntity(author, HttpStatus.CREATED);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteAuthor(@PathVariable long id){
-        if(!authorService.exists(id))
+    public ResponseEntity deleteAuthor(@PathVariable long id) {
+        if (!authorService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        authorService.delete(id);
+        try {
+            authorService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

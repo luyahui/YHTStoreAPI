@@ -2,6 +2,7 @@ package com.yhtart.controller;
 
 import com.yhtart.model.Product;
 import com.yhtart.service.ProductService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -113,13 +114,15 @@ public class ProductController {
     }
 
     @PatchMapping("/sell/{id}")
-    public ResponseEntity sellProduct(@PathVariable long id){
+    public ResponseEntity sellProduct(@PathVariable long id, @RequestBody String json) {
         if (!productService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        try{
-            productService.sell(id);
+        try {
+            JSONObject obj = new JSONObject(json);
+            boolean sold = obj.getBoolean("sold");
+            productService.sell(id, sold);
             return ResponseEntity.ok(null);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -145,7 +148,12 @@ public class ProductController {
     public ResponseEntity deleteProduct(@PathVariable long id) {
         if (!productService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        productService.delete(id);
+        try {
+            productService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

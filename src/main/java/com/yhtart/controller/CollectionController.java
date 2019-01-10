@@ -59,7 +59,12 @@ public class CollectionController {
     public ResponseEntity deleteCollection(@PathVariable long id) {
         if (!collectionService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        collectionService.delete(id);
+        try {
+            collectionService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

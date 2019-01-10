@@ -54,10 +54,15 @@ public class MaterialTypeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteType(@PathVariable( name = "id") long id){
-        if(!materialTypeService.exists(id))
+    public ResponseEntity deleteType(@PathVariable(name = "id") long id) {
+        if (!materialTypeService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        materialTypeService.delete(id);
+        try {
+            materialTypeService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

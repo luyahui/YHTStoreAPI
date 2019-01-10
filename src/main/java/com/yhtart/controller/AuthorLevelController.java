@@ -59,7 +59,12 @@ public class AuthorLevelController {
     public ResponseEntity deleteLevel(@PathVariable("id") long id) {
         if (!authorLevelService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        authorLevelService.delete(id);
+        try {
+            authorLevelService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

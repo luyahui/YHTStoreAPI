@@ -24,43 +24,48 @@ public class EngravingController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getEngraving(@PathVariable long id){
+    public ResponseEntity getEngraving(@PathVariable long id) {
         Engraving engraving = engravingService.findByID(id);
         return engraving == null ? new ResponseEntity(HttpStatus.NO_CONTENT) : ResponseEntity.ok(engraving);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editEngraving(@PathVariable long id, @RequestBody Engraving engraving){
-        if(!engravingService.exists(id))
+    public ResponseEntity editEngraving(@PathVariable long id, @RequestBody Engraving engraving) {
+        if (!engravingService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        try{
+        try {
             engraving.setId(id);
             engraving = engravingService.save(engraving);
-            if(engraving != null)
+            if (engraving != null)
                 return ResponseEntity.ok(engraving);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping
-    public ResponseEntity addEngraving(@RequestBody Engraving engraving){
-        try{
+    public ResponseEntity addEngraving(@RequestBody Engraving engraving) {
+        try {
             engraving = engravingService.save(engraving);
-            if(engraving != null)
+            if (engraving != null)
                 return new ResponseEntity(engraving, HttpStatus.CREATED);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteEngraving(@PathVariable long id){
-        if(!engravingService.exists(id))
+    public ResponseEntity deleteEngraving(@PathVariable long id) {
+        if (!engravingService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        engravingService.delete(id);
+        try {
+            engravingService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

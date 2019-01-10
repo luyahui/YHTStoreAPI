@@ -69,7 +69,12 @@ public class ProductTypeController {
     public ResponseEntity deleteType(@PathVariable(value = "id") long id) {
         if (!productTypeService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        productTypeService.delete(id);
+        try {
+            productTypeService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

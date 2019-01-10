@@ -34,6 +34,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "update Product p set p.sold = true where p.id = :id")
-    void sell(@Param("id") long id);
+    @Query(value = "update Product p set p.sold = :sold where p.id = :id")
+    void sell(@Param("id") long id, @Param("sold") boolean sold);
 }

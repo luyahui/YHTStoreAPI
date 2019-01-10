@@ -69,7 +69,12 @@ public class MaterialController {
     public ResponseEntity deleteMaterial(@PathVariable(value = "id") long id) {
         if (!materialService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        materialService.delete(id);
+        try {
+            materialService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

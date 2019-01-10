@@ -43,7 +43,12 @@ public class RecommendationController {
         if (!recommendationService.exists(product_id)) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        recommendationService.delete(product_id);
+        try {
+            recommendationService.delete(product_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 

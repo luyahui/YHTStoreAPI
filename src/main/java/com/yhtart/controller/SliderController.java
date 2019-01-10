@@ -53,10 +53,15 @@ public class SliderController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable long id){
-        if(!sliderService.exists(id))
+    public ResponseEntity delete(@PathVariable long id) {
+        if (!sliderService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        sliderService.delete(id);
+        try {
+            sliderService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

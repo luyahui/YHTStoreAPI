@@ -55,10 +55,15 @@ public class ProductShapeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteType(@PathVariable(name = "id") long id){
-        if(!productShapeService.exists(id))
+    public ResponseEntity deleteType(@PathVariable(name = "id") long id) {
+        if (!productShapeService.exists(id))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        productShapeService.delete(id);
+        try {
+            productShapeService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 }

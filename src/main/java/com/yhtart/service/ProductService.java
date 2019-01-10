@@ -62,7 +62,7 @@ public class ProductService {
         return productRepository.findByNum(keyword, collection, PageRequest.of(pageNo, pageSize));
     }
 
-    public void sell(long id) {
-        productRepository.sell(id);
+    public void sell(long id, boolean sold) {
+        productRepository.sell(id, sold);
     }
 }
