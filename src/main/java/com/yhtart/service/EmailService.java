@@ -39,7 +39,7 @@ public class EmailService {
     }
 
     public boolean sendMailByCustomer(Customer customer) {
-        String to = "284854930@qq.com";
+        String to = "notice_yht@163.com";
         String subject = "客户询价";
 //        String subject = "Greeting";
 
