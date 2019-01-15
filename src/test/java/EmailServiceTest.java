@@ -29,7 +29,7 @@ public class EmailServiceTest {
     public void testSendToCustomer(){
         Customer customer = new Customer();
         customer.setName("路亚辉");
-        customer.setPhoneNo("12345678901");
+        customer.setCellphone("12345678901");
         customer.setProductUrl("https://www.abc.com/def");
 
         Assert.assertTrue(emailService.sendMailByCustomer(customer));

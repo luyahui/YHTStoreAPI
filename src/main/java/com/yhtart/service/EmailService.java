@@ -47,7 +47,7 @@ public class EmailService {
         content.append("您好，\n");
         content.append("有新客户询价，客户信息如下，请及时联系。\n");
         content.append("\t\t姓名：" + customer.getName() + "\n");
-        content.append("\t\t联系电话：" + customer.getPhoneNo() + "\n");
+        content.append("\t\t联系电话：" + customer.getCellphone() + "\n");
         content.append("\t\t商品链接：" + customer.getProductUrl() + "\n");
         return sendMail(to, subject, content.toString());
     }
