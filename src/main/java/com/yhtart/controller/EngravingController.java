@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Engraving;
 import com.yhtart.service.EngravingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class EngravingController {
     @Autowired
     private EngravingService engravingService;
 
+    @PassToken
     @GetMapping("")
     public ResponseEntity getAllEngravings(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
                                            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -23,6 +25,7 @@ public class EngravingController {
         return engravings.hasContent() ? new ResponseEntity(engravings, HttpStatus.OK) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getEngraving(@PathVariable long id) {
         Engraving engraving = engravingService.findByID(id);

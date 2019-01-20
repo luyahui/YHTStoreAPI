@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.ProductShape;
 import com.yhtart.service.ProductShapeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,14 @@ public class ProductShapeController {
     @Autowired
     private ProductShapeService productShapeService;
 
+    @PassToken
     @GetMapping
     public ResponseEntity getAllShapes() {
         Iterable<ProductShape> shapes = productShapeService.getAll();
         return ResponseEntity.ok(shapes);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getShape(@PathVariable(name = "id") long id) {
         ProductShape shape = productShapeService.getById(id);

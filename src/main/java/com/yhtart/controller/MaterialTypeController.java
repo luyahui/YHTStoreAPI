@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.MaterialType;
 import com.yhtart.service.MaterialTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,14 @@ public class MaterialTypeController {
     @Autowired
     private MaterialTypeService materialTypeService;
 
+    @PassToken
     @GetMapping
     public ResponseEntity getAllTypes() {
         Iterable<MaterialType> types = materialTypeService.findAll();
         return ResponseEntity.ok(types);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getType(@PathVariable(name = "id") long id) {
         MaterialType type = materialTypeService.findById(id);

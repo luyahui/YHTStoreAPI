@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.ProductType;
 import com.yhtart.service.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class ProductTypeController {
     @Autowired
     private ProductTypeService productTypeService;
 
+    @PassToken
     @GetMapping("")
     public ResponseEntity getAllTypes(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
                                       @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -25,6 +27,7 @@ public class ProductTypeController {
         return types.hasContent() ? ResponseEntity.ok(types) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getType(@PathVariable(value = "id") long id) {
         ProductType type = productTypeService.findById(id);

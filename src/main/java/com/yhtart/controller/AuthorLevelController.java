@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.AuthorLevel;
 import com.yhtart.service.AuthorLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,14 @@ public class AuthorLevelController {
     @Autowired
     private AuthorLevelService authorLevelService;
 
+    @PassToken
     @GetMapping
     public ResponseEntity getAllLevels() {
         Iterable<AuthorLevel> levels = authorLevelService.findAll();
         return ResponseEntity.ok(levels);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getLevel(@PathVariable(name = "id") long id) {
         AuthorLevel level = authorLevelService.findById(id);

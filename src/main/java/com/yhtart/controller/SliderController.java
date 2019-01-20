@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Slider;
 import com.yhtart.service.SliderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class SliderController {
     @Autowired
     private SliderService sliderService;
 
+    @PassToken
     @GetMapping
     public ResponseEntity getSliderList() {
         Iterable<Slider> sliderList = sliderService.findAll();

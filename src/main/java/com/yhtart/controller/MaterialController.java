@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Material;
 import com.yhtart.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class MaterialController {
     @Autowired
     private MaterialService materialService;
 
+    @PassToken
     @GetMapping("")
     public ResponseEntity getAllMaterials(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
                                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -26,6 +28,7 @@ public class MaterialController {
         return materials.hasContent() ? ResponseEntity.ok(materials) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getMaterial(@PathVariable(value = "id") long id) {
         Material material = materialService.findById(id);

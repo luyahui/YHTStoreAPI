@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Recommendation;
 import com.yhtart.service.ProductService;
 import com.yhtart.service.RecommendationService;
@@ -17,6 +18,7 @@ public class RecommendationController {
     @Autowired
     private RecommendationService recommendationService;
 
+    @PassToken
     @GetMapping
     public ResponseEntity getRecommendations() {
         return ResponseEntity.ok(recommendationService.findAll());

@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Collection;
 import com.yhtart.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class CollectionController {
     @Autowired
     private CollectionService collectionService;
 
+    @PassToken
     @GetMapping("")
     public ResponseEntity getAllCollections() {
         Iterable<Collection> collections = collectionService.findAll();

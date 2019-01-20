@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Author;
 import com.yhtart.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+    @PassToken
     @GetMapping("")
     public ResponseEntity getAllAuthors(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
                                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -32,6 +34,7 @@ public class AuthorController {
 //        return ResponseEntity.ok(authors);
 //    }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getAuthor(@PathVariable long id) {
         Author author = authorService.findByID(id);

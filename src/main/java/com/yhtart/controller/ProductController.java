@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Product;
 import com.yhtart.service.ProductService;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @PassToken
     @GetMapping("")
     public ResponseEntity getAllProducts(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
                                          @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -26,12 +28,14 @@ public class ProductController {
         return products.hasContent() ? ResponseEntity.ok(products) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getProduct(@PathVariable long id) {
         Product product = productService.find(id);
         return product == null ? new ResponseEntity(HttpStatus.NO_CONTENT) : ResponseEntity.ok(product);
     }
 
+    @PassToken
     @GetMapping("/search")
     public ResponseEntity searchProduct(@RequestParam(value = "keyword", defaultValue = "") String keyword,
                                         @RequestParam(value = "collection", defaultValue = "") String collection,
@@ -45,6 +49,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @PassToken
     @GetMapping("/author")
     public ResponseEntity searchByAuthor(@RequestParam(value = "keyword", defaultValue = "") String keyword,
                                          @RequestParam(value = "collection", defaultValue = "") String collection,
@@ -58,6 +63,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @PassToken
     @GetMapping("/material")
     public ResponseEntity searchByMaterial(@RequestParam(value = "keyword", defaultValue = "") String keyword,
                                            @RequestParam(value = "collection", defaultValue = "") String collection,
@@ -71,6 +77,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @PassToken
     @GetMapping("/type")
     public ResponseEntity searchByType(@RequestParam(value = "keyword", defaultValue = "") String keyword,
                                        @RequestParam(value = "collection", defaultValue = "") String collection,
@@ -84,6 +91,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @PassToken
     @GetMapping("/num")
     public ResponseEntity searchByNum(@RequestParam(value = "keyword", defaultValue = "") String keyword,
                                       @RequestParam(value = "collection", defaultValue = "") String collection,

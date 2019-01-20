@@ -1,5 +1,6 @@
 package com.yhtart.controller;
 
+import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Customer;
 import com.yhtart.service.CustomerService;
 import com.yhtart.service.EmailService;
@@ -25,6 +26,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @PassToken
     @GetMapping("")
     public ResponseEntity getAllCustomers(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
                                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -33,6 +35,7 @@ public class CustomerController {
         return customers.hasContent() ? new ResponseEntity(customers, HttpStatus.OK) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @PassToken
     @GetMapping("/{id}")
     public ResponseEntity getCustomer(@PathVariable long id) {
         Customer customer = customerService.findByID(id);
@@ -75,6 +78,7 @@ public class CustomerController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PassToken
     @PostMapping
     public ResponseEntity askForPrice(@RequestBody Customer customer) {
         if (customer.getName().equals("") || customer.getCellphone().equals("") || customer.getProductUrl().equals(""))
