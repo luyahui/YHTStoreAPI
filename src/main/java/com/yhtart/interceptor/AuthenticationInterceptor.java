@@ -3,15 +3,11 @@ package com.yhtart.interceptor;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.yhtart.annotation.PassToken;
 import com.yhtart.model.User;
 import com.yhtart.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,7 +31,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         // get handler method
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
-        System.out.println(method.getName());
 
         // logging in is not required for some methods
         if (method.isAnnotationPresent(PassToken.class))
@@ -49,22 +44,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return false;
         }
         long userId;
-//        try {
-//            userId = Long.parseLong(JWT.decode(token).getAudience().get(0));
-//        } catch (JWTDecodeException j) {
-//            throw new RuntimeException("401");
-//        }
-//        User user = userService.findUserById(userId);
-//        if (user == null) {
-//            throw new RuntimeException("用户不存在，请重新登录");
-//        }
-//        // 验证 token
-//        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(user.getPassword())).build();
-//        try {
-//            jwtVerifier.verify(token);
-//        } catch (JWTVerificationException e) {
-//            throw new RuntimeException("401");
-//        }
+
         try {
             userId = Long.parseLong(JWT.decode(token).getAudience().get(0));
             User user = userService.findUserById(userId);

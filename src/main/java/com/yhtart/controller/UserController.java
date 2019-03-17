@@ -8,10 +8,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("")
@@ -37,5 +34,28 @@ public class UserController {
         object.put("token", token);
         object.put("username", userInBase.getUsername());
         return ResponseEntity.ok(object.toString());
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity signup(@RequestBody User user) {
+        User userInBase = userService.findByUsername(user.getUsername());
+        if (userInBase != null) {
+            JSONObject object = new JSONObject();
+            object.put("message", "用户名已存在！");
+            return ResponseEntity.badRequest().body(object.toString());
+        }
+
+        user = userService.save(user);
+        return new ResponseEntity(user, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity chageUser(@PathVariable long id, @RequestBody User user) {
+        User userInBase = userService.findUserById(id);
+        if (userInBase == null)
+            return ResponseEntity.badRequest().body(null);
+        user.setId(id);
+        user = userService.save(user);
+        return ResponseEntity.ok(user);
     }
 }

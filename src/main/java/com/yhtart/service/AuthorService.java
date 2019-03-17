@@ -19,16 +19,20 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     @Transactional
-    public Author save(Author a){
+    public Author save(Author a) {
         return authorRepository.save(a);
     }
 
-    public Author findByID(long id){
+    public Author findByID(long id) {
         return authorRepository.findById(id).orElse(null);
     }
 
     public Page<Author> findAll(int pageNo, int pageSize) {
         return authorRepository.findAll(PageRequest.of(pageNo, pageSize));
+    }
+
+    public Iterable<Author> findAll() {
+        return authorRepository.findAll();
     }
 
     public boolean exists(long id) {
@@ -43,12 +47,13 @@ public class AuthorService {
     public Map<String, List<Author>> findAllByLevel() {
         Map<String, List<Author>> map = new HashMap<>();
         Iterable<Author> authors = authorRepository.findAll();
-        for(Author author : authors){
+        for (Author author : authors) {
             String title = author.getLevel().getTitle();
-            if(!map.containsKey(title))
+            if (!map.containsKey(title))
                 map.put(title, new ArrayList<>());
             map.get(title).add(author);
         }
         return map;
     }
+
 }

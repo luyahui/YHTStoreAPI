@@ -4,13 +4,9 @@ import com.yhtart.annotation.PassToken;
 import com.yhtart.model.ProductType;
 import com.yhtart.service.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "types")
@@ -19,12 +15,18 @@ public class ProductTypeController {
     @Autowired
     private ProductTypeService productTypeService;
 
+    //    @PassToken
+//    @GetMapping("")
+//    public ResponseEntity getAllTypes(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+//                                      @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+//        Page<ProductType> types = productTypeService.findAll(pageNo, pageSize);
+//        return types.hasContent() ? ResponseEntity.ok(types) : new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
     @PassToken
     @GetMapping("")
-    public ResponseEntity getAllTypes(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                      @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
-        Page<ProductType> types = productTypeService.findAll(pageNo, pageSize);
-        return types.hasContent() ? ResponseEntity.ok(types) : new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity getAllTypes() {
+        Iterable<ProductType> types = productTypeService.findAll();
+        return types.iterator().hasNext() ? ResponseEntity.ok(types) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @PassToken
@@ -33,12 +35,6 @@ public class ProductTypeController {
         ProductType type = productTypeService.findById(id);
         return type != null ? ResponseEntity.ok(type) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-//
-//    @GetMapping("/shapes")
-//    public ResponseEntity getAllByShape(){
-//        Map<String, List<ProductType>> types = productTypeService.findAllByShape();
-//        return ResponseEntity.ok(types);
-//    }
 
     @PostMapping("")
     public ResponseEntity addType(@RequestBody ProductType type) {

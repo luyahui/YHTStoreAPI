@@ -23,8 +23,7 @@ public class EmailService {
 
         try {
             // set message properties
-            helper.setFrom("notice_yht@163.com");
-//            helper.setCc("notice_yht@163.com");
+            helper.setFrom("notice_yhtart@163.com");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content);
@@ -39,9 +38,8 @@ public class EmailService {
     }
 
     public boolean sendMailByCustomer(Customer customer) {
-        String to = "notice_yht@163.com";
+        String to = "notice_yhtart@163.com";
         String subject = "客户询价";
-//        String subject = "Greeting";
 
         StringBuilder content = new StringBuilder();
         content.append("您好，\n");

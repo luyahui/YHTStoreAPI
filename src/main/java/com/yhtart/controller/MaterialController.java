@@ -4,13 +4,9 @@ import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Material;
 import com.yhtart.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "materials")
@@ -19,13 +15,19 @@ public class MaterialController {
     @Autowired
     private MaterialService materialService;
 
+//    @PassToken
+//    @GetMapping("")
+//    public ResponseEntity getAllMaterials(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+//                                          @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+//        Page<Material> materials = materialService.findAll(pageNo, pageSize);
+//
+//        return materials.hasContent() ? ResponseEntity.ok(materials) : new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
     @PassToken
     @GetMapping("")
-    public ResponseEntity getAllMaterials(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                          @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
-        Page<Material> materials = materialService.findAll(pageNo, pageSize);
-
-        return materials.hasContent() ? ResponseEntity.ok(materials) : new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity getAllMaterials() {
+        Iterable<Material> materials = materialService.findAll();
+        return materials.iterator().hasNext() ? ResponseEntity.ok(materials) : new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @PassToken

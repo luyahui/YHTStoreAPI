@@ -42,6 +42,7 @@ public class CustomerController {
         return customer == null ? new ResponseEntity(HttpStatus.NO_CONTENT) : ResponseEntity.ok(customer);
     }
 
+    @PassToken
     @GetMapping("/report")
     public ResponseEntity getReport(HttpServletResponse response) {
         XSSFWorkbook wb = customerService.getReport();
@@ -81,7 +82,9 @@ public class CustomerController {
     @PassToken
     @PostMapping
     public ResponseEntity askForPrice(@RequestBody Customer customer) {
-        if (customer.getName().equals("") || customer.getCellphone().equals("") || customer.getProductUrl().equals(""))
+        if (customer.getName() == null || customer.getName().equals("")
+                || customer.getCellphone() == null || customer.getCellphone().equals("")
+                || customer.getProductUrl() == null || customer.getProductUrl().equals(""))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         try {
             customer.setTimestamp(new Timestamp(System.currentTimeMillis()));

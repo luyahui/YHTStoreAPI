@@ -18,6 +18,10 @@ public class EngravingService {
         return engravingRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
 
+    public Iterable<Engraving> findAll() {
+        return engravingRepository.findAll();
+    }
+
     public Engraving findByID(long id) {
         return engravingRepository.findById(id).orElse(null);
     }
@@ -35,4 +39,5 @@ public class EngravingService {
     public void delete(long id) {
         engravingRepository.deleteById(id);
     }
+
 }

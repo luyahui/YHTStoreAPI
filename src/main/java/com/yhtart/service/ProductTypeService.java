@@ -22,6 +22,10 @@ public class ProductTypeService {
         return productTypeRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
 
+    public Iterable<ProductType> findAll() {
+        return productTypeRepository.findAll();
+    }
+
     public ProductType findById(long id) {
         return productTypeRepository.findById(id).orElse(null);
     }
@@ -53,4 +57,5 @@ public class ProductTypeService {
 
         return map;
     }
+
 }

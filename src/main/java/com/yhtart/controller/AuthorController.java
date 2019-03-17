@@ -4,13 +4,9 @@ import com.yhtart.annotation.PassToken;
 import com.yhtart.model.Author;
 import com.yhtart.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("authors")
@@ -19,20 +15,20 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+    //    @PassToken
+//    @GetMapping("")
+//    public ResponseEntity getAllAuthors(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
+//                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+//        Page<Author> authors = authorService.findAll(pageNo, pageSize);
+//
+//        return authors.hasContent() ? new ResponseEntity(authors, HttpStatus.OK) : new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
     @PassToken
     @GetMapping("")
-    public ResponseEntity getAllAuthors(@RequestParam(name = "pageNo", defaultValue = "0") int pageNo,
-                                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
-        Page<Author> authors = authorService.findAll(pageNo, pageSize);
-
-        return authors.hasContent() ? new ResponseEntity(authors, HttpStatus.OK) : new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity getAllAuthors() {
+        Iterable<Author> authors = authorService.findAll();
+        return authors.iterator().hasNext() ? ResponseEntity.ok(authors) : ResponseEntity.noContent().build();
     }
-//
-//    @GetMapping("/levels")
-//    public ResponseEntity getAuthorsByLevel(){
-//        Map<String, List<Author>> authors = authorService.findAllByLevel();
-//        return ResponseEntity.ok(authors);
-//    }
 
     @PassToken
     @GetMapping("/{id}")

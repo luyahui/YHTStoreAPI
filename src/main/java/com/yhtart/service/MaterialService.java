@@ -22,6 +22,10 @@ public class MaterialService {
         return materialRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
 
+    public Iterable<Material> findAll() {
+        return materialRepository.findAll();
+    }
+
     public Material findById(long id) {
         return materialRepository.findById(id).orElse(null);
     }
@@ -51,4 +55,5 @@ public class MaterialService {
         }
         return map;
     }
+
 }

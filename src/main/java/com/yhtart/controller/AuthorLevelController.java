@@ -19,7 +19,7 @@ public class AuthorLevelController {
     @GetMapping
     public ResponseEntity getAllLevels() {
         Iterable<AuthorLevel> levels = authorLevelService.findAll();
-        return ResponseEntity.ok(levels);
+        return levels.iterator().hasNext() ? ResponseEntity.ok(levels) : ResponseEntity.noContent().build();
     }
 
     @PassToken
